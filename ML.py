@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
@@ -9,6 +10,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 import Coeficients
 import combine_datasets
+import joblib as joblib
 
 
 def main_ai(X, y):
@@ -46,6 +48,9 @@ def main_ai(X, y):
         print(f'Actual Value: {y_test[i]} Predicted Value: {y_pred[i]}')
     print(f'Mean Squared Error: {mse}')
     print(f'R2 Score: {r2}')
+
+    joblib.dump(model, 'model.pkl')
+
 
 
 def process_countries(df):
@@ -136,5 +141,4 @@ if __name__ == "__main__":
     x, y = get_x_and_y(True)
     x = np.array(x)
     y = np.array(y)
-    print("privet")
     main_ai(x, y)
